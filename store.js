@@ -18,6 +18,11 @@ let ica = {
         this.staff = this.staff.filter(p => p !== person);
         person.worksAt = null;
         return this;
+    },
+
+    addProduct: function (product) {
+        this.products.push(product)
+        return this;
     }
 };
 
@@ -64,6 +69,15 @@ let erik = {
     age: 35,
     salary: 24000,
     worksAt: {},
+    worksAt: {},
+    startWorkAt: function (store) {
+        this.worksAt = store;
+        // store.staff.push(this)
+        store.addStaff(this);
+        return this;
+
+        
+    }
 }
 
 ica.staff.push(niklas);
@@ -73,3 +87,25 @@ console.log(ica);
 erik.worksAt = ica;
 
 ica.addStaff(erik);
+
+// --------- product objects ----- 
+
+let milk = {
+    name: "Mellanmjölk",
+    price: 11
+}
+
+let cheese = {
+    name: "Herrgårdsost",
+    price: 59
+}
+
+let beef = {
+    name: "Biff",
+    price: 109
+}
+
+let fisk = {
+    name: "Lax",
+    price: 89
+}
