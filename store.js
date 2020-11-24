@@ -7,6 +7,18 @@ let ica = {
     city: "Skurup",
     staff: [],
     products: [],
+    addStaff: function (person){
+        // Vi använder oss av this här, för att "this" hänvisar till det egna objektet. Så "this" = ica. 
+
+        this.staff.push(person);
+        person.worksAt = this;
+    },
+    fireStaff: function(person) {
+        // vi kan här använda en arraymetod som heter filter(), den filterar bort element utifrån ett villkor. ÄR det sant så behålls elemenetet är det falskt soreteras det bort. 
+        this.staff = this.staff.filter(p => p !== person);
+        person.worksAt = null;
+        return this;
+    }
 };
 
 console.log(ica);
@@ -19,7 +31,15 @@ let niklas = {
     lastname:  "Håkansson",
     age: 30,
     salary: 45000,
-    worksAt: {},
+    worksAt: null,
+    startWorkAt: function (store) {
+        this.worksAt = store;
+        // store.staff.push(this)
+        store.addStaff(this);
+        return this;
+
+        
+    }
 }
 
 let my = {
@@ -28,6 +48,14 @@ let my = {
     age: 26,
     salary: 42000,
     worksAt: {},
+    startWorkAt: function (store) {
+        this.worksAt = store;
+        // store.staff.push(this)
+        store.addStaff(this);
+        return this;
+
+        
+    }
 }
 
 let erik = {
@@ -39,9 +67,9 @@ let erik = {
 }
 
 ica.staff.push(niklas);
-ica.staff.push(my);
-ica.staff.push(erik)
 
 console.log(ica);
 
 erik.worksAt = ica;
+
+ica.addStaff(erik);
